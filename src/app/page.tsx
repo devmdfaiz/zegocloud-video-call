@@ -16,17 +16,17 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       if (containerRef.current) {
-        const token = await generateZegoCloudInstance();
+        const { token, userID } = await generateZegoCloudInstance();
 
         const { ZegoUIKitPrebuilt } = await import(
           "@zegocloud/zego-uikit-prebuilt"
         );
 
         const kitToken = ZegoUIKitPrebuilt.generateKitTokenForProduction(
-          Number(process.env.ZEGOCLOUD_APPID || 0),
+          Number(process.env.NEXT_PUBLIC_ZEGOCLOUD_APPID || 0),
           token,
           roomID,
-          auth.session.id,
+          userID,
           auth.session.username
         );
 
